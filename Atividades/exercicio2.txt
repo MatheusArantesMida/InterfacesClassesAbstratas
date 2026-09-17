@@ -8,12 +8,12 @@ namespace InterfacesClassesAbstratas
         {
             Espada espada = new Espada
             {
-                Nome = "Espada do Guardião",
+                Nome = "Espadão",
                 DanoBase = 40
             };
             Arco arco = new Arco
             {
-                Nome = "Arco Élfico",
+                Nome = "Arcão",
                 DanoBase = 30
             };
             espada.ExibirInfo();

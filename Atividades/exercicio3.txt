@@ -1,45 +1,53 @@
-﻿using System;
-
-interface ICamera
+﻿namespace InterfacesClassesAbstratas
 {
-    void TirarFoto();
-}
-
-interface IVoavel
-{
-    void Decolar();
-    void Pousar();
-}
-
-class Drone : ICamera, IVoavel
-{
-    public void TirarFoto()
+    internal class Program
     {
-        Console.WriteLine("Tirando foto panorâmica...");
-    }
-
-    public void Decolar()
-    {
-        Console.WriteLine("Drone decolando verticalmente...");
-    }
-
-    public void Pousar()
-    {
-        Console.WriteLine("Drone pousando...");
+        static void Main()
+        {
+            Drone drone = new Drone();
+            ICamera camera = drone;
+            camera.TirarFoto();
+            IVoavel voavel = drone;
+            voavel.Decolar();
+            voavel.Pousar();
+        }
     }
 }
 
-class Program
+namespace InterfacesClassesAbstratas
 {
-    static void Main()
+    internal interface ICamera
     {
-        Drone drone = new Drone();
+        void TirarFoto();
+    }
+}
 
-        ICamera camera = drone;
-        camera.TirarFoto();
+namespace InterfacesClassesAbstratas
+{
+    internal interface IVoavel
+    {
+        void Decolar();
+        void Pousar();
+    }
+}
 
-        IVoavel voavel = drone;
-        voavel.Decolar();
-        voavel.Pousar();
+using System;
+
+namespace InterfacesClassesAbstratas
+{
+    internal class Drone : ICamera, IVoavel
+    {
+        public void TirarFoto()
+        {
+            Console.WriteLine("Tirando foto panorâmica...");
+        }
+        public void Decolar()
+        {
+            Console.WriteLine("Drone decolando verticalmente...");
+        }
+        public void Pousar()
+        {
+            Console.WriteLine("Drone pousando...");
+        }
     }
 }
