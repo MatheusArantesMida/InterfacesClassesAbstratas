@@ -29,9 +29,6 @@ namespace InterfacesClassesAbstratas
             {
                 bool valido = item.Validar();
 
-                // Todos os objetos desta lista herdam de CampoFormulario.
-                CampoFormulario campo = (CampoFormulario)item;
-
                 Console.WriteLine(
                     $"{campo.NomeDoCampo}: " +
                     $"{(valido ? "Válido" : "Inválido")}");
