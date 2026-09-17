@@ -1,38 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 
-interface IValidavel
+namespace InterfacesClassesAbstratas
 {
-    bool Validar();
-}
-
-abstract class CampoFormulario
-{
-    public string NomeDoCampo { get; set; } = "";
-    public string Valor { get; set; } = "";
-}
-
-class CampoTexto : CampoFormulario, IValidavel
-{
-    public bool Validar()
+    internal class Program
     {
-        return !string.IsNullOrEmpty(Valor);
-    }
-}
-
-class CampoNumerico : CampoFormulario, IValidavel
-{
-    public bool Validar()
-    {
-        return int.TryParse(Valor, out _);
-    }
-}
-
-class Program
-{
-    static void Main()
-    {
-        List<IValidavel> campos = new List<IValidavel>
+        static void Main()
+        {
+            List<IValidavel> campos = new List<IValidavel>
         {
             new CampoTexto
             {
@@ -50,17 +25,56 @@ class Program
                 Valor = "ABC"
             }
         };
+            foreach (IValidavel item in campos)
+            {
+                bool valido = item.Validar();
 
-        foreach (IValidavel item in campos)
+                // Todos os objetos desta lista herdam de CampoFormulario.
+                CampoFormulario campo = (CampoFormulario)item;
+
+                Console.WriteLine(
+                    $"{campo.NomeDoCampo}: " +
+                    $"{(valido ? "Válido" : "Inválido")}");
+            }
+        }
+    }
+}
+
+namespace InterfacesClassesAbstratas
+{
+    internal interface IValidavel
+    {
+        bool Validar();
+    }
+}
+
+namespace InterfacesClassesAbstratas
+{
+    internal abstract class CampoFormulario
+    {
+        public string NomeDoCampo { get; set; } = "";
+        public string Valor { get; set; } = "";
+    }
+}
+
+namespace InterfacesClassesAbstratas
+{
+    internal class CampoTexto : CampoFormulario, IValidavel
+    {
+        public bool Validar()
         {
-            bool valido = item.Validar();
+            return !string.IsNullOrEmpty(Valor);
+        }
+    }
+}
 
-            // Todos os objetos desta lista herdam de CampoFormulario.
-            CampoFormulario campo = (CampoFormulario)item;
-
-            Console.WriteLine(
-                $"{campo.NomeDoCampo}: " +
-                $"{(valido ? "Válido" : "Inválido")}");
+namespace InterfacesClassesAbstratas
+{
+    internal class CampoNumerico : CampoFormulario, IValidavel
+    {
+        public bool Validar()
+        {
+            return int.TryParse(Valor, out _);
         }
     }
 }
