@@ -1,0 +1,58 @@
+﻿using System;
+
+abstract class Arma
+{
+    public string Nome { get; set; } = "";
+    public double DanoBase { get; set; }
+
+    public void ExibirInfo()
+    {
+        Console.WriteLine($"Nome: {Nome} | Dano base: {DanoBase}");
+    }
+
+    public abstract double CalcularAtaqueCritico();
+}
+
+class Espada : Arma
+{
+    public override double CalcularAtaqueCritico()
+    {
+        return DanoBase * 2;
+    }
+}
+
+class Arco : Arma
+{
+    public override double CalcularAtaqueCritico()
+    {
+        return DanoBase * 3;
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Espada espada = new Espada
+        {
+            Nome = "Espada do Guardião",
+            DanoBase = 40
+        };
+
+        Arco arco = new Arco
+        {
+            Nome = "Arco Élfico",
+            DanoBase = 30
+        };
+
+        espada.ExibirInfo();
+        Console.WriteLine(
+            $"Ataque crítico: {espada.CalcularAtaqueCritico()}");
+
+        Console.WriteLine();
+
+        arco.ExibirInfo();
+        Console.WriteLine(
+            $"Ataque crítico: {arco.CalcularAtaqueCritico()}");
+    }
+}
